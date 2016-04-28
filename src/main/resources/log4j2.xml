@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout pattern="[%d{yyyyMMddHHmmss}] %C{1}.%M(%L) -> %m%n" />
+        </Console>
+
+        <File name="File" fileName="${sys:user.home}/Desktop/report.txt">
+            <PatternLayout pattern="%m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="reportAppender" level="info" additivity="false">
+            <Appender-ref ref="File"/>
+        </Logger>
+        <Logger name="br.com.nozella" level="info" additivity="false">
+            <Appender-ref ref="STDOUT"/>
+        </Logger>
+        <Root>
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>
+

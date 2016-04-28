@@ -1,7 +1,8 @@
 package br.com.nozella.testconnection.main;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,8 +19,8 @@ import java.util.List;
  */
 public class App implements Runnable {
 
-    private static final Logger log = Logger.getLogger(App.class);
-    private static final Logger report = Logger.getLogger("reportAppender");
+    private static final Logger log = LogManager.getLogger(App.class);
+    private static final Logger report = LogManager.getLogger("reportAppender");
 
     private static final String pathname = String.format("%s/Desktop/ipportlist.txt", System.getProperty("user.home"));
     private static File defaultFile = new File(pathname);
@@ -39,13 +40,7 @@ public class App implements Runnable {
             if (file.exists() && !file.isDirectory()) {
                 fileToRead = file;
             } else {
-                log.warn(
-                        String.format(
-                                "Arquivo %s nao encontrado. Tentando ler arquivo %s",
-                                args[0],
-                                fileToRead.getAbsoluteFile()
-                        )
-                );
+                log.warn(String.format("Arquivo %s nao encontrado. Tentando ler arquivo %s",args[0], fileToRead.getAbsoluteFile()));
             }
         }
         if (!fileToRead.canRead()) {
